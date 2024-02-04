@@ -17,7 +17,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:shadowColor="#3F51B5"
         android:textColor="#3F51B5"
         android:textSize="34sp"
         tools:text="Login"
