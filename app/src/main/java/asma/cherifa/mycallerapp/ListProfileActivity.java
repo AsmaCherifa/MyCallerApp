@@ -8,18 +8,32 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-public class ListProfileActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class ListProfileActivity extends AppCompatActivity {
+ListView lv_list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_profile);
+        lv_list = findViewById(R.id.lv_list);
+        //ArrayAdapter ad = new ArrayAdapter<>(ListProfileActivity.this, android.R.layout.simple_list_item_1,Home.data);
+        //lv_list.setAdapter(ad);
 
+        //ArrayList<Profil> profiles = Home.data;
+
+
+        //ProfileAdapter adapter = new ProfileAdapter(this, profiles);
+
+        MyprofileAdapter ad = new MyprofileAdapter(ListProfileActivity.this,Home.data);
+        lv_list.setAdapter(ad);
 
         Button btnexit;
         btnexit = findViewById(R.id.btnexit_listprofile);
@@ -31,37 +45,6 @@ public class ListProfileActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-        DBHandler dbHandler = new DBHandler(ListProfileActivity.this);
-        TableLayout tableLayout = findViewById(R.id.tableLayout);
-
-        TableRow headerRow = createTableRow();
-        addTextViewToRow("username", headerRow);
-        addTextViewToRow("phone", headerRow);
-        addTextViewToRow("mail", headerRow);
-        tableLayout.addView(headerRow);
-
-        SQLiteDatabase db = dbHandler.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM profile", null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                // Get data from the cursor
-                String username = cursor.getString(cursor.getColumnIndexOrThrow("username"));
-                String phone = cursor.getString(cursor.getColumnIndexOrThrow("phone"));
-                String mail = cursor.getString(cursor.getColumnIndexOrThrow("mail"));
-
-
-                // Create a new row
-                TableRow tableRow = createTableRow();
-                addTextViewToRow(username, tableRow);
-                addTextViewToRow(phone, tableRow);
-                addTextViewToRow(mail, tableRow);
-                tableLayout.addView(tableRow);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
 
     }
 

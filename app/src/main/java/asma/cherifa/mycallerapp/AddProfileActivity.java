@@ -44,6 +44,9 @@ public class AddProfileActivity extends AppCompatActivity {
                 String name_user = firstname.getText().toString();
                 String lastname_user = lastname.getText().toString();
                 String phone_user = phone.getText().toString();
+                Profil p =new Profil(name_user,lastname_user,phone_user);
+                Home.data.add(p);
+
 
                 if (name_user.equals("") || lastname_user.equals("") || phone_user.equals("") )
                 {
@@ -70,8 +73,7 @@ public class AddProfileActivity extends AppCompatActivity {
         btnexit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(AddProfileActivity.this, Home.class);
-                startActivity(i);
+                finish();
             }
         });
 

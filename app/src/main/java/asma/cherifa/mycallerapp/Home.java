@@ -8,14 +8,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class Home extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class Home extends AppCompatActivity {
+    public static ArrayList<Profil> data =new ArrayList<>();
     Button btnaddProfile;
     Button btnlistProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_home);
 
         String username = getIntent().getStringExtra("username");
